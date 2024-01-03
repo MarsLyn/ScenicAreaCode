@@ -1,0 +1,59 @@
+{% extends 'api/index.html' %}
+{% load static %}
+
+{% block title %}用户中心{% endblock %}
+
+{% block header %}
+<div class="row" style="background-color: #21A936; color: #ffffff;">
+  <div class="col-12 py-3 text-center">
+    <h3 class="mb-0">{% block h_title %}用户中心{% endblock %}</h3>
+  </div>
+</div>
+
+
+{% block search %}
+
+{% endblock %}
+
+{% endblock %}
+
+{% block main %}
+<div class="row align-items-center" style="background-color: #f58668; height: 10rem; color: #ffffff;">
+    <div class="col-auto pe-0">
+        <p class="mb-0 fs-1 ">
+            {% if request.user.is_authenticated %}{{request.user}}{% else %}姓名{% endif %}
+        </p>
+    </div>
+    <div class="col-auto">
+        <p class="mb-0">
+            V1
+        </p>
+    </div>
+</div>
+<div class="row align-items-center" style="background-color: #ffffff; height: 4rem;">
+    <div class="col-auto">
+        <p class="mb-0">
+            收货地址
+        </p>
+    </div>
+</div>
+<div class="row align-items-center">
+    <div class="col-12">
+        <hr class="my-0">
+    </div>
+</div>
+<div class="row align-items-center" style="background-color: #ffffff; height: 4rem;">
+    <div class="col-auto">
+        <p class="mb-0">
+            收货地址
+        </p>
+    </div>
+</div>
+<div class="row align-items-center">
+    <div class="col-12">
+        <hr class="my-0">
+    </div>
+</div>
+
+
+{% endblock %}

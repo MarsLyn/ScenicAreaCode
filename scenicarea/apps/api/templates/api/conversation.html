@@ -1,0 +1,45 @@
+{% extends 'api/index.html' %}
+{% load static %}
+
+{% block title %}对话{% endblock %}
+
+{% block header %}
+<div class="row" style="background-color: #21A936; color: #ffffff;">
+  <div class="col-12 py-3 text-center">
+    <h3 class="mb-0">{% block h_title %}对话{% endblock %}</h3>
+  </div>
+</div>
+
+
+{% block search %}
+
+{% endblock %}
+
+{% endblock %}
+
+{% block main %}
+
+{% for item in conversations %}
+<a href="{% url 'conversation:new' item.commodity.id%}" style="outline: none; text-decoration: none;" class="link-dark">
+<div class="row align-items-center">
+    <div class="col-12">
+        <div class="card mt-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-4" style="height: 129px;">
+                    <img src="{{item.commodity.picture.url}}" class="object-fit-cover rounded-start" alt="..." style="height: 100%; width: 100%;">
+                </div>
+                <div class="col-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.commodity.title}}</h5>
+                        <p class="card-text text-truncate">{{item.commodity.details}}</p>
+                        <p class="card-text"><small class="text-muted">{{item.commodity.create_date}}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</a>
+{% endfor %}
+
+{% endblock %}
