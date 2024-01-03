@@ -1,0 +1,38 @@
+{% extends 'merchant/index.html' %}
+
+{% load static %}
+
+{% block context %}
+    <div class="row py-3">
+        <div class="col-md-auto">
+            <h3>正在删除商品</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <form enctype="application/x-www-form-urlencoded" method="post" action="{% url 'merchant:delete_good' obj.id %}" class="py-3">
+    {% csrf_token %}
+
+
+    <div class="row mb-3">
+        <div class="col-md-auto">
+            <p>你确认想要删除 标题是：{{obj.title}} 的商品和他下面所有相关的项目？</p>
+        </div>
+    </div>
+
+    <div class="mb-3 row row-cols-2 align-items-center">
+        <div class="col-auto">
+            <input type="submit" value="确定" name="confirmed" class="py-2 btn btn-danger text-light">
+        </div>
+        <div class="col-auto">
+            <a href="{{referer}}" class="py-2 btn btn-info text-light">返回</a>
+        </div>
+    </div>
+
+        </form>
+    </div>
+{% endblock %}

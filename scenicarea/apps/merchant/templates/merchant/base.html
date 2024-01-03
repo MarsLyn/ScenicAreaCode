@@ -1,0 +1,50 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="container-fluid" id="container">
+        <div id="header" class="row align-items-center py-3" style="background-color: #417690;">
+            {% block header %}
+            <div class="col-md-3" style="color: #F5DD5D;">
+                <h3 class="mb-0">商家管理中心</h3>
+            </div>
+
+            {% if request.user.is_authenticated %}
+                <div class="col-md-auto ms-md-auto">
+                    <p class="mb-0" style="color: #ffffff;">你好: {{request.user}}</p>
+                </div>
+                <div class="col-md-auto">
+                    <a href="{% url 'merchant:conversation' %}" class="btn" style="background: #F5DD5D;">对话</a>
+                </div>
+                <div class="col-md-auto">
+                    <a href="{% url 'merchant:log_out' %}" class="btn" style="background: #F5DD5D;">退出</a>
+                </div>
+            {% else %}
+                <div class="col-md-auto ms-md-auto">
+                    <a href="{% url 'merchant:sing_up' %}" class="btn" style="background: #F5DD5D;">注册</a>
+                </div>
+                <div class="col-md-auto">
+                    <a href="{% url 'merchant:log_in' %}" class="btn" style="background: #F5DD5D;">登录</a>
+                </div>
+            {% endif %}
+            {% endblock %}
+        </div>
+        <div id="main">
+            {% block main %}{% endblock %}
+        </div>
+        <div id="footer">
+            {% block footer %}{% endblock %}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-ep+dxp/oz2RKF89ALMPGc7Z89QFa32C8Uv1A3TcEK8sMzXVysblLA3+eJWTzPJzT" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/mhDoLbDldZc3qpsJHpLogda//BVZbgYuw6kof4u2FrCedxOtgRZDTHgHUhOCVim" crossorigin="anonymous"></script>
+  </body>
+</html>

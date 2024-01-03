@@ -1,0 +1,105 @@
+{% extends 'merchant/base.html' %}
+
+{% load static %}
+
+{% block title%}商家站点管理{% endblock %}
+
+
+{% block main %}
+<div class="row">
+    <div class="col-md-2">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="list-group list-group-flush">
+                    <a href="{% url 'merchant:index' %}" class="list-group-item">首页</a>
+                    <a href="#" class="list-group-item">A second link item</a>
+                    <a href="#" class="list-group-item">A third link item</a>
+                    <a href="#" class="list-group-item">A fourth link item</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        {% block context %}
+        <div class="row py-3">
+            <div class="col-md-auto">
+                <h3 class="mb-0">商品列表</h3>
+            </div>
+            <div class="col-md-auto align-self-center ms-md-auto">
+                <a href="{% url 'merchant:create_good' %}" class="btn btn-primary">增加商品</a>
+            </div>
+        </div>
+        <div class="row py-3">
+            <div class="col-md-12">
+                <form action="{% url 'merchant:search_good' %}" method="get">
+                    <div class="row">
+                        <div class="col-md align-self-center">
+                            <input type="text" name="query" id="query" class="form-control" value="{{query}}" placeholder="输入商品标题">
+                        </div>
+                        <div class="col-md">
+                            <button class="btn btn-primary" type="submit">搜索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr class="text-center">
+                        <th>ID</th>
+                        <th>主图</th>
+                        <th>
+                            标题
+                        </th>
+                        <th>
+                            价格
+                        </th>
+                        <th>
+                            创建时间
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in queryset %}
+                        <tr class="align-middle text-center">
+                            <th>{{item.id}}</th>
+                            <td class="col-md-1">
+                                <img src="/media/{{item.picture}}" alt="主图" width="100%">
+                            </td>
+                            <td>
+                                <a style="outline: none; text-decoration: none;" href="{% url 'merchant:details' item.id %}" class="link-dark" >
+                                {{item.title}}
+                                </a>
+                            </td>
+                            <td>
+                                {{item.price}}
+                            </td>
+                            <td>
+                                {{item.create_date}}
+                            </td>
+                            <td>
+                                <a href="{% url 'merchant:details' item.id %}" class="btn btn-primary">
+                                    编辑
+                                </a>
+                                <a href="{% url 'merchant:delete_good' item.id %}" class="btn btn-danger">
+                                    删除
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="col-md-auto">
+                <P>总数：{{paginator}}</P>
+            </div>
+        
+        </div>
+        {% endblock %}
+    </div>
+    
+</div>
+{% endblock %}

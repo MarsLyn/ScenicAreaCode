@@ -1,0 +1,57 @@
+{% extends 'api/index.html' %}
+
+{% load static %}
+
+{% block title%}对话{% endblock %}
+
+{% block header %}
+<div class="row" style="background-color: #21A936; color: #ffffff;">
+  <div class="col-12 py-3 text-center">
+    <h3 class="mb-0">{% block h_title %}对话{% endblock %}</h3>
+  </div>
+</div>
+{% block search %}
+
+{% endblock %}
+
+{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-12">
+        <div class="row">
+            <h5 class="my-3">
+                历史消息
+            </h5>
+            
+            <div class="col-12 mh-100 overflow-y-auto" style="height: 500px; background-color: rgba(0,0,255,.1);">
+                {% for item in queryset %}
+                    <div class="row align-items-center mt-2">
+                        <div class="col-auto fw-light">
+                            {{item.create_date}}
+                        </div>
+                        <div class="col-auto">
+                            <h5 class="mb-0 fw-bolder">{% if request.user == item.created_by %}我{% else %}{{item.created_by.username}}{% endif %}:</h5>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-12">
+                            <p class="text-break">{{item.content}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <form action="{% url 'conversation:new' id %}" method="post" class="row my-3">
+            {% csrf_token %}
+            <div class="col-10">
+                {{form.content}}
+            </div>
+            <div class="col-auto px-0">
+                <button type="submit" class="btn btn-info text-light">发送</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

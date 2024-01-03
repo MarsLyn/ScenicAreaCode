@@ -1,0 +1,48 @@
+{% extends 'api/base.html' %}
+{% load static %}
+
+{% block title %}商城{% endblock %}
+
+{% block header %}
+<div class="row" style="background-color: #21A936; color: #ffffff;">
+  <div class="col-12 py-3 text-center">
+    <h3 class="mb-0">{% block h_title %}积分商城{% endblock %}</h3>
+  </div>
+</div>
+
+
+{% block search %}
+<div class="row" style="background-color: #ffffff;">
+    <div class="col-12 px-1">
+      <form action="." method="get">
+        <div class="input-group py-2">
+            <input type="text" class="form-control" value="{{query}}" name="query" placeholder="请输入商品标题">
+            <button class="btn btn-outline-secondary" type="button">搜索</button>
+        </div>
+      </form>
+    </div>
+</div>
+{% endblock %}
+
+{% endblock %}
+
+{% block main %}
+<div class="row gy-2 row-cols-2 justify-content-center" style="background-color: #ffffff;">
+    {% for item in queryset %}
+    
+        <div class="col card p-0 mx-1" style="width: 12rem;">
+            <a href="{% url 'api:details' item.id %}" style="outline: none; text-decoration: none;" class="link-dark">
+            <div style="width: 100%; height: 12rem;">
+                <img src="{{item.picture.url}}" class="card-img-top" alt="主图" style="object-fit: cover; height: 100%; width: 100%;">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{item.title}}</h5>
+                <p class="card-text text-truncate mb-1">{{item.details}}</p>
+                <p style="color: #EEB248;" class="mb-1">￥<span class="fs-2">{{item.price}}</span></p>
+            </div>
+            </a>
+        </div>
+    
+    {% endfor %}
+</div>
+{% endblock %}

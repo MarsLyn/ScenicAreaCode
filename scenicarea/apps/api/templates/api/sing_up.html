@@ -1,0 +1,62 @@
+{% extends 'api/base.html' %}
+{% load static %}
+
+{% block title %}注册{% endblock %}
+
+{% block main %}
+<div class="row mb-3">
+    <div class="col-md-12" style="background-color: rgb(238, 238, 238);">
+        <h4 class="my-4">
+            账户注册
+        </h4>
+
+        <hr class="border border-dark border-1 opacity-50">
+        
+        <form action="{% url 'api:sing_up' %}" method="post" >
+            {% csrf_token %}
+            <div class="row mb-3">
+                <label for="#" class="form-label">用户名:</label>
+                <div class="col-md-12">
+                    {{ form.username }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="#" class="form-label">邮箱:</label>
+                <div class="col-md-12">
+                    {{ form.email }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="#" class="form-label">密码:</label>
+                <div class="col-md-12">
+                    <input type="password" class="form-control" name="password1" id="id_password1" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="#" class="form-label">确认密码:</label>
+                <div class="col-md-12">
+                    <input type="password" class="form-control" name="password2" id="id_password2" required>
+                </div>               
+            </div>
+
+            {% if form.errors or form.non_field_errors %}
+            <div class="row mb-3">
+                <div class="col-auto">
+                    {% for field in form %}
+                    {{ field.errors}}
+                    {% endfor %}
+
+                    {{ form.non_field_errors }}
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="row mb-4">
+                <div class="col-md-3" style="margin-left: 5rem;">
+                    <button type="submit" class="btn btn-primary" style="width: 16rem;">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

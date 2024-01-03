@@ -1,0 +1,50 @@
+{% extends 'api/index.html' %}
+
+{% block h_title %}
+商品详情
+{% endblock %}
+
+{% block search %}
+{% endblock %}
+
+{% block main %}
+<div class="message">
+    <a href="{% url 'conversation:new' obj.id %}" class="btn text-bg-primary">联系卖家</a>
+</div>
+
+
+        <!-- <a href="" class="btn btn-info fixed-top">联系商家</a> -->
+
+<div class="row">
+    <div class="col-12 px-0">
+        <img src="{{obj.picture.url}}" alt="主图" style="width: 100%;">
+    </div>
+</div>
+<div class="row align-items-center" style="background-color: #21A936; color: #ffffff;">
+    <div class="col-8">
+        <p class="mb-0">月销量0</p>
+    </div>
+    <div class="col-4" style="background-color: #FF0F5B; color: #ffffff;">
+        <p class="mb-0 float-end">￥<span style="font-size: 2rem;">{{obj.price}}</span></p>
+    </div>
+</div>
+<div class="row py-3">
+    <div class="col-12">
+        <h3 class="mb-0">{{obj.title}}</h3>
+    </div>
+</div>
+<div class="row py-3">
+    <div class="col-12">
+        <h3 class="mb-0">商品详情</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <p>{{obj.details}}</p>
+        {% for item in obj.assistantimages_set.all %}
+            <img src="{{item.picture.url}}" alt="副图" style="width: 100%;">
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

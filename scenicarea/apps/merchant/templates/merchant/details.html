@@ -1,0 +1,30 @@
+{% extends 'merchant/create.html' %}
+
+{% load static %}
+
+{% block title%}商品详情{% endblock %}
+
+{% block panel %}修改商品{% endblock %}
+
+{% block action %}
+{% url 'merchant:details' id %}
+{% endblock %}
+
+{% block delete_button %}
+<div class="col-md-auto">
+    <a href="{% url 'merchant:delete_good' id %}" class="btn btn-danger link-light">删除</a>
+</div>
+{% endblock %}
+
+{% block goodimage %}
+<div class="row mb-3">
+    <div class="col-md-12">
+        <h5 class="mb-0">主图预览:</h5>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <img src="/media/{{good_form.picture.value}}" alt="" class="img-fluid">
+    </div>
+</div>
+{% endblock %}
