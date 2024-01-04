@@ -11,6 +11,9 @@ urlpatterns = [
     path('singup/', views.sing_up, name='sing_up'),
     path('center/', views.center, name='center'),
     path('conversation/index/', views.conversation, name='conversation'),
+    path('friend/index/', views.friend_list, name='friend_list'),
+    path('friend/search/', views.search_friend, name='search_friend'),
+    path('friend/<int:id>/delete/', views.delete_friend, name='delete_friend'),
     path('login/', auth_views.LoginView.as_view(authentication_form=LoginForm, template_name='api/log_in.html', next_page='/'), name='log_in'),
     path('logout/', auth_views.LogoutView.as_view(template_name='api/log_in.html', next_page='/login/'), name='log_out'),
 ]

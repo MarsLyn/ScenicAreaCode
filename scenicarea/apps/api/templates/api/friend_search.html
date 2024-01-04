@@ -1,0 +1,71 @@
+{% extends 'api/index.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block title %}搜索好友{% endblock %}
+
+{% block header %}
+<div class="row" style="background-color: #21A936; color: #ffffff;">
+  <div class="col-12 py-3 text-center">
+    <h3 class="mb-0">{% block h_title %}{{request.user}}{% endblock %}</h3>
+  </div>
+</div>
+
+
+{% block search %}
+<div class="row" style="background-color: #ffffff;">
+    <div class="col-12 px-1">
+      <form action="{% url 'api:search_friend' %}" method="get">
+        <div class="input-group py-2">
+            <input type="text" class="form-control" value="{{query}}" name="query" placeholder="搜索">
+            <button class="btn btn-outline-secondary" type="submit">搜索</button>
+        </div>
+      </form>
+    </div>
+</div>
+{% endblock %}
+
+{% endblock %}
+
+{% block main %}
+
+{% for item in user %}
+{% if item.username != request.user.username %}
+    <div class="row align-items-center">
+        <div class="col-12">
+            <div class="card mt-3" style="max-width: 540px;">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h5 class="card-title fixed">{{item.username}}</h5>
+                        </div>
+                      </div>
+                    <div class="col-4">
+                        <div class="card-body">
+                            <form action="{% url 'api:search_friend' %}?query={{query}}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{item.id}}" name="passive_by">
+                                {% if form.errors or forms.non_field_errors %}
+                                <div class="row mb-3">
+                                    <div class="col-auto">
+                                        {% for field in form %}
+                                        {{ field.errors}}
+                                        {% endfor %}
+                                        {{ form.non_field_errors }}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                
+                                {%concern item request.user%}
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endfor %}
+
+{% endblock %}

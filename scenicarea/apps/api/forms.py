@@ -1,6 +1,13 @@
 from django import forms
 
-from apps.merchant.forms import SingupForm, LoginForm
+from .models import Concern
 
 TEXTINPUTCLASS = 'form-control'
 
+class ConcernForm(forms.ModelForm):
+    class Meta:
+        model = Concern
+        fields = ('passive_by',)
+        widgets = {
+            'passive_by': forms.TextInput(attrs={'class': TEXTINPUTCLASS, 'type': 'hidden'})
+        }
