@@ -1,0 +1,95 @@
+{% extends 'api/index.html' %}
+{% load static %}
+
+{% block title %}赠送礼物{% endblock %}
+
+{% block header %}
+<div class="row" style="background-color: #21A936; color: #ffffff;">
+  <div class="col-12 py-3 text-center">
+    <h3 class="mb-0">{% block h_title %}赠送礼物{% endblock %}</h3>
+  </div>
+</div>
+
+
+{% block search %}
+
+{% endblock %}
+
+{% endblock %}
+
+{% block main %}
+<div class="row mt-3">
+    <div class="col-12">
+        <h5 class="mb-0">赠送商品</h5>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <hr class="my-3">
+    </div>
+</div>
+
+<div class="card" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-4" style="height: 129px;">
+        <img src="{{obj.picture.url}}" class="object-fit-cover rounded-start" alt="..." style="height: 100%; width: 100%;">
+        </div>
+        <div class="col-8">
+        <div class="card-body">
+            <h5 class="card-title text-truncate">{{obj.title}}</h5>
+            <p class="card-text text-truncate">{{obj.details}}</p>
+            <p class="card-text"><small class="text-muted">￥</small>{{obj.price}}</p>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 2rem;">
+    <div class="col-12">
+        <h5 class="mb-0">填写收货地址</h5>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <hr class="my-3">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <form action="{{url}}" method="post">
+            {% csrf_token %}
+            <label class="form-label">{{form.address.label}}:</label>
+            {{form.address}}
+            <label class="form-label mt-3">选择要赠送的好友:</label>
+            <select name="receive_user" class="form-select">
+                <option selected>--</option>
+                {% for concern in concerns %}
+                <option value="{{concern.passive_by.id}}">{{concern.passive_by.username}}</option>
+                {% endfor %}
+            </select>
+            {% if form.errors or form.non_field_errors %}
+            <div class="row mt-3">
+                <div class="col-auto">
+                    {% for field in form %}
+                    {{ field.errors}}
+                    {% endfor %}
+                    {{ form.non_field_errors }}
+                </div>
+            </div>
+            {% endif %}
+            <input type="hidden" value="{{status}}" name="status">
+            <div class="row justify-content-center" style="margin-top: 3rem;">
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary" style="--bs-btn-padding-x:8rem; --bs-btn-padding-y:0.55rem; --bs-btn-font-size: 1.5rem;">赠送</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -21,7 +21,7 @@
 <div class="row align-items-center" style="background-color: #f58668; height: 10rem; color: #ffffff;">
     <div class="col-auto pe-0">
         <p class="mb-0 fs-1 ">
-            {% if request.user.is_authenticated %}{{request.user}}{% else %}<a href="{% url 'api:log_in' %}" style="outline: none; text-decoration: none;" class="link-dark">未登录用户</a>{% endif %}
+            {% if request.user.is_authenticated %}{{request.user}}{% else %}<a href="{% url 'api:log_in' %}" style="outline: none; text-decoration: none;" class="link-dark">立即登录</a>{% endif %}
         </p>
     </div>
     {% if request.user.is_authenticated %}
@@ -30,6 +30,13 @@
                 V1
             </p>
         </div>
+    {% endif %}
+    {% if request.user.is_authenticated %}
+    <div class="col-auto ms-auto">
+        <a href="{% url 'api:log_out' %}" style="outline: none; text-decoration: none;" class="link-light btn btn-primary">
+            退出登录
+        </a>
+    </div>
     {% endif %}
 </div>
 {% if request.user.is_authenticated %}
@@ -47,13 +54,29 @@
             <hr class="my-0">
         </div>
     </div>
-    <div class="row align-items-center" style="background-color: #ffffff; height: 4rem;">
-        <div class="col-auto">
-            <p class="mb-0">
-                收货地址
-            </p>
+    <a href="{% url 'api:gift_index' %}" style="outline: none; text-decoration: none;" class="link-dark">
+        <div class="row align-items-center" style="background-color: #ffffff; height: 4rem;">
+            <div class="col-auto">
+                <p class="mb-0">
+                    礼物
+                </p>
+            </div>
+        </div>
+    </a>
+    <div class="row align-items-center">
+        <div class="col-12">
+            <hr class="my-0">
         </div>
     </div>
+    <a href="{% url 'wallet:index' %}" style="outline: none; text-decoration: none;" class="link-dark">
+        <div class="row align-items-center" style="background-color: #ffffff; height: 4rem;">
+            <div class="col-auto">
+                <p class="mb-0">
+                    钱包
+                </p>
+            </div>
+        </div>
+    </a>
     <div class="row align-items-center">
         <div class="col-12">
             <hr class="my-0">

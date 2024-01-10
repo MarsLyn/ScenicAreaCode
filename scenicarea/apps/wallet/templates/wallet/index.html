@@ -1,0 +1,42 @@
+{% extends 'api/index.html' %}
+{% load static %}
+
+{% block title %}钱包{% endblock %}
+
+{% block header %}
+<div class="row" style="background-color: #21A936; color: #ffffff;">
+  <div class="col-12 py-3 text-center">
+    <h3 class="mb-0">{% block h_title %}钱包{% endblock %}</h3>
+  </div>
+</div>
+
+
+{% block search %}
+
+{% endblock %}
+
+{% endblock %}
+
+{% block main %}
+<div class="row text-center py-4">
+    <div class="col-12">
+        <div class="row mb-3">
+            <div class="col-12">
+                <h3 class="mb-0">目前余额</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mb-0" style="font-size: 4.5rem;"><small style="font-size: 2.5rem;">￥</small>{{wallet.balance}}</h3>
+            </div>
+        </div>
+        <div class="row py-5">
+            <div class="col-12">
+                <a href="{% url 'wallet:recharge' wallet.user.id %}" class="btn btn-primary" style="--bs-btn-padding-x: 9rem; --bs-btn-padding-y: 1rem;">充值</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

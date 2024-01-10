@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'apps.api.apps.ApiConfig',
     'apps.merchant.apps.MerchantConfig',
     'apps.conversation.apps.ConversationConfig',
+    'apps.wallet.apps.WalletConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,0 +1,54 @@
+{% extends 'api/index.html' %}
+{% load static %}
+
+{% block title %}余额充值{% endblock %}
+
+{% block header %}
+<div class="row" style="background-color: #21A936; color: #ffffff;">
+  <div class="col-12 py-3 text-center">
+    <h3 class="mb-0">{% block h_title %}余额充值{% endblock %}</h3>
+  </div>
+</div>
+
+
+{% block search %}
+
+{% endblock %}
+
+{% endblock %}
+
+{% block main %}
+<div class="row text-center py-4">
+    <div class="col-12">
+        <div class="row mb-3">
+            <div class="col-12">
+                <h3 class="mb-0">目前余额</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3 class="mb-0" style="font-size: 4.5rem;"><small style="font-size: 2.5rem;">￥</small>{{wallet.balance}}</h3>
+            </div>
+        </div>
+        <div class="row py-5">
+            <div class="col-12">
+                <form action="." method="post">
+                    {% csrf_token %}
+                    {{form.balance}}
+                    {% if form.errors or form.non_field.errors %}
+                    <div class="row mt-1">
+                        <div class="col-auto">
+                            {{form.balance.errors}}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <button type="submit" class="btn btn-primary mt-5" style="--bs-btn-padding-x: 9rem; --bs-btn-padding-y: 1rem;">充值</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'api/index.html' %}
+{% load static %}
+
+{% block title %}我的礼物{% endblock %}
+
+{% block header %}
+<div class="row" style="background-color: #21A936; color: #ffffff;">
+  <div class="col-12 py-3 text-center">
+    <h3 class="mb-0">{% block h_title %}我的礼物{% endblock %}</h3>
+  </div>
+</div>
+
+
+{% block search %}
+
+{% endblock %}
+
+{% endblock %}
+
+{% block main %}
+<div class="row text-center align-items-center" style="height: 3rem;">
+  <div class="col">
+    <a href="{% url 'api:gift_index' %}" style="outline: none; text-decoration: none;" class="link-dark"><p class="mb-0 fs-5 {% if not request.path_info == '/gift/'%} opacity-50 {% endif %}">我赠送的</p></a>
+  </div>
+  <div class="col-auto">
+    <p class="mb-0 fs-5 opacity-25">|</p>
+  </div>
+  <div class="col">
+    <a href="{% url 'api:gift_receive_index' %}" style="outline: none; text-decoration: none;" class="link-dark"><p class="mb-0 fs-5 {% if not request.path_info == '/gift/receive/index/'%} opacity-50 {% endif %}">我收到的</p></a>
+  </div>
+</div>
+{% for item in giftrelation %}
+<a href="{% url 'api:gift_details' item.gift.id %}" style="outline: none; text-decoration: none;" class="link-dark">
+  <div class="card mt-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-4" style="height: 129px;">
+        <img src="{{item.gift.commodity.picture.url}}" class="object-fit-cover rounded-start" alt="..." style="height: 100%; width: 100%;">
+        </div>
+        <div class="col-8">
+        <div class="card-body">
+            <h5 class="card-title" style="color: #21A936;"><small class="text-muted">状态：</small>{{item.status.name}}</h5>
+            {% if item.receive_user == request.user %}
+              <p class="card-text"><small class="text-muted">赠送人：</small>{{item.gift_user.username}}</p>
+            {% else %}
+              <p class="card-text"><small class="text-muted">接收人：</small>{{item.receive_user.username}}</p>
+            {% endif %}
+            <p class="card-text"><small class="text-muted">更新时间：</small>{{item.update_date}}</p>
+        </div>
+        </div>
+    </div>
+  </div>
+</a>
+
+{% endfor %}
+{% endblock %}

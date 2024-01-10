@@ -9,7 +9,11 @@
 
 {% block main %}
 <div class="message">
-    <a href="{% url 'conversation:new' obj.id %}" class="btn text-bg-primary">联系卖家</a>
+    <a href="{% url 'conversation:new' obj.id %}" class="btn text-bg-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 1.2rem;">联系卖家</a>
+</div>
+
+<div class="gift">
+    <a href="{% url 'api:new_gift' obj.id %}" class="btn text-bg-warning text-light" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: 1.2rem;">赠送礼物</a>
 </div>
 
 

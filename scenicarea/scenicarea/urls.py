@@ -24,5 +24,6 @@ urlpatterns = [
     path('', include('apps.api.urls')),
     path('merchant/', include('apps.merchant.urls')),
     path('inbox/', include('apps.conversation.urls')),
+    path('wallet/', include('apps.wallet.urls'),)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
